@@ -63,7 +63,6 @@ class CreateAppTables extends Migration
             $table->string('prefecture');
             $table->string('city');
             $table->string('street');
-            $table->string('memo');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
