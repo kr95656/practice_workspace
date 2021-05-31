@@ -27,4 +27,23 @@ class ResetPasswordController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+
+    /**
+      * Get the password reset validation rules.
+      *
+      * @return array
+      */
+      protected function rules()
+      {
+        // rulesメソッドをオーバーライドしてバリデーションルールをカスタマイズ
+        // オーバーライド元のメソッド→vendor/laravel/ui/auth-backend/ResetsPasswords.php
+
+          return [
+              'token' => 'required',
+              'email' => 'required|email',
+              'password' => 'required|min:8',
+          ];
+      }
+
+
 }
