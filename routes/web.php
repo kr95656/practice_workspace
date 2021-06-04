@@ -19,12 +19,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')
+    ->name('home');
 
 Route::prefix('stuff')
     ->namespace('Stuff')
     ->middleware('auth')
     ->group(function () {
         Route::get('edit-profile', 'ProfileController@showEditProfile')
+            ->name('stuffs.edit-profile');
+        Route::post('edit-profile', 'ProfileController@editProfile')
             ->name('stuffs.edit-profile');
     });
