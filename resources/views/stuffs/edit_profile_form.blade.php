@@ -25,8 +25,6 @@
                     @csrf
 
                     {{-- プロフィール画像 --}}
-                    {{-- storage/app/public/avatars --}}
-
                     <span class="avatar-form image-picker">
                         <input type="file" name="avatar" class="d-none" accept="image/png, image/jpeg, image/gif" id="avatar"/>
                         <label for="avatar" class="d-inline-block">

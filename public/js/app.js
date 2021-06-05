@@ -37392,6 +37392,20 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+document.querySelector('.image-picker input').addEventListener('change', function (e) {
+  var input = e.target;
+  var reader = new FileReader();
+
+  reader.onload = function (e) {
+    //親に戻り、imgタグを指定
+    input.closest('.image-picker').querySelector('img').src = e.target.result;
+  };
+
+  if (input.files[0]) {
+    reader.readAsDataURL(input.files[0]);
+  }
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
