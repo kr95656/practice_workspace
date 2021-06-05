@@ -24,6 +24,20 @@
                 <form method="POST" action="{{ route('stuffs.edit-profile') }}" class="p-5" enctype="multipart/form-data">
                     @csrf
 
+                    {{-- プロフィール画像 --}}
+                    {{-- storage/app/public/avatars --}}
+
+                    <span class="avatar-form image-picker">
+                        <input type="file" name="avatar" class="d-none" accept="image/png, image/jpeg, image/gif" id="avatar"/>
+                        <label for="avatar" class="d-inline-block">
+                            @if (!empty($employee->avatar_file_name))
+                                <img src="/storage/avatars/{{$employee->avatar_file_name}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
+                            @else
+                                <img src="/images/avatar-default.svg" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
+                            @endif
+                        </label>
+                    </span>
+
                     {{-- 氏名 --}}
                     <div class="form-group mt-3">
                         <label for="name">氏名</label>

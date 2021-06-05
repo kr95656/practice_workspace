@@ -24,6 +24,7 @@ class EditRequest extends FormRequest
     public function rules()
     {
         return [
+            'avatar' => ['file', 'image'], //jpeg, png, bmp, gif, svg, webpのみ承認
             'name' => ['required', 'string', 'max:255'],
         ];
     }
