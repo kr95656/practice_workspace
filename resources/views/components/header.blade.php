@@ -37,6 +37,10 @@
                         </a>
                         {{-- ドロップダウンメニュー --}}
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('sell-item') }}">
+                                <img src="/images/registered-regular.svg" alt="商品登録" style="width: 30px">商品を出品
+                            </a>
+
                             <a class="dropdown-item" href="{{ route('stuffs.edit-profile') }}">
                                 <i class="far fa-address-card text-left" style="width: 30px"></i>プロフィール編集
                             </a>
