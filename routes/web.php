@@ -25,8 +25,8 @@ Route::get('/home', 'HomeController@index')
 Route::middleware('auth')
     ->group(function () {
         Route::get('sell_item_register', 'SellItemController@showItemRegisterForm')->name('sell-item');
+        Route::post('sell_item_register', 'SellItemController@ItemRegister')->name('sell-item');
     });
-
 
 Route::prefix('stuff')
     ->namespace('Stuff')

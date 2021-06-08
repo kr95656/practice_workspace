@@ -75,19 +75,35 @@ class CreateAppTables extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedInteger('price'); //符号なし
+            $table->unsignedInteger('price')->nullable(); //符号なし
             $table->timestamps();
 
             // 外部キー
-            $table->unsignedBigInteger('secondary_category_id');
-            $table->unsignedBigInteger('item_condition_id');
-            $table->unsignedBigInteger('employee_id');
-            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('secondary_category_id')->nullable();
+            $table->unsignedBigInteger('item_condition_id')->nullable();
+            $table->unsignedBigInteger('employee_id')->nullable();
+            $table->unsignedBigInteger('customer_id')->nullable();
 
             $table->foreign('secondary_category_id')->references('id')->on('secondary_categories');
             $table->foreign('item_condition_id')->references('id')->on('item_conditions');
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->foreign('customer_id')->references('id')->on('customers');
+
+            // $table->id();
+            // $table->string('name');
+            // $table->unsignedInteger('price'); //符号なし
+            // $table->timestamps();
+
+            // // 外部キー
+            // $table->unsignedBigInteger('secondary_category_id');
+            // $table->unsignedBigInteger('item_condition_id');
+            // $table->unsignedBigInteger('employee_id');
+            // $table->unsignedBigInteger('customer_id');
+
+            // $table->foreign('secondary_category_id')->references('id')->on('secondary_categories');
+            // $table->foreign('item_condition_id')->references('id')->on('item_conditions');
+            // $table->foreign('employee_id')->references('id')->on('employees');
+            // $table->foreign('customer_id')->references('id')->on('customers');
 
         });
 
