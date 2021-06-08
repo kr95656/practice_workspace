@@ -27,20 +27,20 @@ class PrimaryCategorySeeder extends Seeder
             'name'    => '鶏',
             'sort_no' => 3,
         ]);
+        // factory(PrimaryCategory::class)->create([
+        //     'id'      => 4,
+        //     'name'    => '羊',
+        //     'sort_no' => 3,
+        // ]);
+        // factory(PrimaryCategory::class)->create([
+        //     'id'      => 5,
+        //     'name'    => '馬',
+        //     'sort_no' => 5,
+        // ]);
         factory(PrimaryCategory::class)->create([
             'id'      => 4,
-            'name'    => '羊',
-            'sort_no' => 3,
-        ]);
-        factory(PrimaryCategory::class)->create([
-            'id'      => 5,
-            'name'    => '馬',
-            'sort_no' => 5,
-        ]);
-        factory(PrimaryCategory::class)->create([
-            'id'      => 6,
             'name'    => 'その他',
-            'sort_no' => 6,
+            'sort_no' => 4,
         ]);
     }
 }
