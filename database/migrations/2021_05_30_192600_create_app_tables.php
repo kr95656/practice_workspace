@@ -23,22 +23,30 @@ class CreateAppTables extends Migration
             $table->id();
             $table->timestamps();
 
+            $table->string('name');
+            $table->integer('sort_no');
+
         });
 
         Schema::create('secondary_categories', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
-            // 外部キー
-            $table->unsignedBigInteger('primary_category_id');
+            $table->string('name');
+            $table->integer('sort_no');
 
-            $table->foreign('primary_category_id')->references('id')->on('primary_categories');
+            // // 外部キー（子カテゴリ）
+            // $table->unsignedBigInteger('primary_category_id');
+
+            // $table->foreign('primary_category_id')->references('id')->on('primary_categories');
         });
 
         Schema::create('item_conditions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
+            $table->string('name');
+            $table->integer('sort_no');
         });
 
         Schema::create('customers', function (Blueprint $table) {
@@ -83,11 +91,16 @@ class CreateAppTables extends Migration
             $table->unsignedBigInteger('item_condition_id')->nullable();
             $table->unsignedBigInteger('employee_id')->nullable();
             $table->unsignedBigInteger('customer_id')->nullable();
+            // 子カテゴリ(secondary_category)
+            $table->unsignedBigInteger('primary_category_id')->nullable();
 
             $table->foreign('secondary_category_id')->references('id')->on('secondary_categories');
             $table->foreign('item_condition_id')->references('id')->on('item_conditions');
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->foreign('customer_id')->references('id')->on('customers');
+
+            // 子カテゴリ(secondary_category)
+            $table->foreign('primary_category_id')->references('id')->on('primary_categories');
 
             // $table->id();
             // $table->string('name');
