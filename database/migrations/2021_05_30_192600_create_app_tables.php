@@ -19,6 +19,7 @@ class CreateAppTables extends Migration
 
         });
 
+        // 商品の部位_親カテゴリ
         Schema::create('primary_categories', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
@@ -28,6 +29,7 @@ class CreateAppTables extends Migration
 
         });
 
+        // 商品の部位_子カテゴリ
         Schema::create('secondary_categories', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
@@ -35,9 +37,31 @@ class CreateAppTables extends Migration
             $table->string('name');
             $table->integer('sort_no');
 
-            // 外部キー（子カテゴリ）
+            // 外部キー
             $table->unsignedBigInteger('primary_category_id');
             $table->foreign('primary_category_id')->references('id')->on('primary_categories');
+        });
+
+        // 商品の品種_親カテゴリ
+        Schema::create('primary_kinds', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+
+            $table->string('name');
+            $table->integer('sort_no');
+        });
+
+        // 商品の品種_子カテゴリ
+        Schema::create('secondary_kinds', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+
+            $table->string('name');
+            $table->integer('sort_no');
+
+            // 外部キー
+            $table->unsignedBigInteger('primary_kind_id');
+            $table->foreign('primary_kind_id')->references('id')->on('primary_kinds');
         });
 
         // 商品の等級
@@ -51,15 +75,6 @@ class CreateAppTables extends Migration
 
         // 商品の原産地
         Schema::create('place_of_origins', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-
-            $table->string('name');
-            $table->integer('sort_no');
-        });
-
-        // 商品の品種
-        Schema::create('kinds', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
@@ -216,6 +231,7 @@ class CreateAppTables extends Migration
         Schema::dropIfExists('secondary_categories');
         Schema::dropIfExists('primary_categories');
         Schema::dropIfExists('place_of_origins');
-        Schema::dropIfExists('kinds');
+        Schema::dropIfExists('secondary_kinds');
+        Schema::dropIfExists('primary_kinds');
     }
 }

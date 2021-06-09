@@ -81,6 +81,27 @@
                         @enderror
                     </div>
 
+                    {{-- 品種 --}}
+                    <div class="form-group mt-3">
+                        <label for="kind">品種</label>
+                        <select name="kind" class="custom-select form-control @error('kind') is-invalid @enderror">
+                            @foreach ($kinds as $kind)
+                                <optgroup label="{{$kind->name}}">
+                                    @foreach($kind->secondaryKinds as $secondary_kind)
+                                        <option value="{{$secondary_kind->id}}" {{old('kind') == $secondary_kind->id ? 'selected' : ''}}>
+                                            {{$secondary_kind->name}}
+                                        </option>
+                                    @endforeach
+                                </optgroup>
+                            @endforeach
+                        </select>
+                        @error('kind')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
                     {{-- 商品の等級 --}}
                     <div class="form-group mt-3">
                         <label for="condition">商品の等級</label>

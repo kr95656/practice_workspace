@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\ItemCondition;
 use App\Models\PrimaryCategory;
+use App\Models\PrimaryKind;
 use App\Models\PlaceOfOrigin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,13 +17,15 @@ class SellItemController extends Controller
 {
     public function showItemRegisterForm ()
     {
-        $categories = PrimaryCategory::orderBy('sort_no')->get();
         $conditions = ItemCondition::orderBy('sort_no')->get();
+        $categories = PrimaryCategory::orderBy('sort_no')->get();
+        $kinds = PrimaryKind::orderBy('sort_no')->get();
         $place_of_origin = PlaceOfOrigin::orderBy('sort_no')->get();
 
         return view('sell_item')
             ->with('conditions', $conditions)
             ->with('categories', $categories)
+            ->with('kinds', $kinds)
             ->with('place_of_origins', $place_of_origin);
     }
 
