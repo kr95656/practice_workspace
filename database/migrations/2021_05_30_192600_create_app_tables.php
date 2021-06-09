@@ -40,7 +40,26 @@ class CreateAppTables extends Migration
             $table->foreign('primary_category_id')->references('id')->on('primary_categories');
         });
 
+        // 商品の等級
         Schema::create('item_conditions', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+
+            $table->string('name');
+            $table->integer('sort_no');
+        });
+
+        // 商品の原産地
+        Schema::create('place_of_origins', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+
+            $table->string('name');
+            $table->integer('sort_no');
+        });
+
+        // 商品の品種
+        Schema::create('kinds', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
@@ -82,6 +101,7 @@ class CreateAppTables extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('description');
             $table->unsignedInteger('price')->nullable(); //符号なし
             $table->timestamps();
 
@@ -195,6 +215,7 @@ class CreateAppTables extends Migration
         Schema::dropIfExists('customers');
         Schema::dropIfExists('secondary_categories');
         Schema::dropIfExists('primary_categories');
-
+        Schema::dropIfExists('place_of_origins');
+        Schema::dropIfExists('kinds');
     }
 }

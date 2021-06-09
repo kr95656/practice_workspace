@@ -22,8 +22,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')
     ->name('home');
 
+//商品登録機能
 Route::middleware('auth')
     ->group(function () {
+        // 単品登録
+        Route::get('sell_item_register', 'SellItemController@showItemRegisterForm')->name('sell-item');
+        Route::post('sell_item_register', 'SellItemController@ItemRegister')->name('sell-item');
+
+        //CSV登録
         Route::get('sell_item_csv_register', 'SellItemController@showItemCsvRegisterForm')->name('sell-item-csv');
         Route::post('sell_item_csv_register', 'SellItemController@ItemCsvRegister')->name('sell-item-csv');
     });

@@ -3,15 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\ItemCondition;
+use App\Models\PrimaryCategory;
+use App\Models\PlaceOfOrigin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-// use Illuminate\Validation\Validator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 
 class SellItemController extends Controller
 {
+    public function showItemRegisterForm ()
+    {
+        $categories = PrimaryCategory::orderBy('sort_no')->get();
+        $conditions = ItemCondition::orderBy('sort_no')->get();
+        $place_of_origin = PlaceOfOrigin::orderBy('sort_no')->get();
+
+        return view('sell_item')
+            ->with('conditions', $conditions)
+            ->with('categories', $categories)
+            ->with('place_of_origins', $place_of_origin);
+    }
+
+
+
+
+
+
+
+
+    // CSV登録
     public function showItemCsvRegisterForm ()
     {
         return view('sell_item_csv');

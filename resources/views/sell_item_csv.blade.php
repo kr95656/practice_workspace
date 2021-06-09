@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    商品出品登録フォーム
+    CSV：商品出品登録フォーム
 @endsection
 
 @section('content')
