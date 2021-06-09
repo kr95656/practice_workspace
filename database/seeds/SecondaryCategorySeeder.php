@@ -204,7 +204,7 @@ class SecondaryCategorySeeder extends Seeder
 
     }
 
-    // 子カテゴリ
+    // 子カテゴリとは独立させる
     //     factory(SecondaryCategory::class)->create([
     //         'id'                  => 1,
     //         'name'                => 'うで',

@@ -24,8 +24,8 @@ Route::get('/home', 'HomeController@index')
 
 Route::middleware('auth')
     ->group(function () {
-        Route::get('sell_item_register', 'SellItemController@showItemRegisterForm')->name('sell-item');
-        Route::post('sell_item_register', 'SellItemController@ItemRegister')->name('sell-item');
+        Route::get('sell_item_csv_register', 'SellItemController@showItemCsvRegisterForm')->name('sell-item-csv');
+        Route::post('sell_item_csv_register', 'SellItemController@ItemCsvRegister')->name('sell-item-csv');
     });
 
 Route::prefix('stuff')

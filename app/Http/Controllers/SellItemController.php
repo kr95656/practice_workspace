@@ -12,9 +12,9 @@ use Illuminate\Validation\Rule;
 
 class SellItemController extends Controller
 {
-    public function showItemRegisterForm ()
+    public function showItemCsvRegisterForm ()
     {
-        return view('sell_item');
+        return view('sell_item_csv');
     }
 
     /**
@@ -24,7 +24,7 @@ class SellItemController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function ItemRegister (Request $request)
+    public function ItemCsvRegister (Request $request)
     {
         $item = new Item();
 
@@ -32,7 +32,7 @@ class SellItemController extends Controller
 
         // アップロードファイルに対してのバリデート
         if ($validator->fails() === true) {
-            return redirect('sell_item_register')
+            return redirect('sell_item_csv_register')
                 ->with('message', $validator->errors()->first('csv_file'));
         }
 
@@ -40,7 +40,7 @@ class SellItemController extends Controller
         $temporary_csv_file = $request->file('csv_file')->store('csv');
 
         // ファイルを開く
-        $fp = fopen(storage_path('app/') . $temporary_csv_file, 'r');
+        $fp = fopen(storage_path('app/') . $temporary_csv_file, 'r') or exit("{$temporary_csv_file}をひらけませんでした。もう一度ファイルがcsvで保存されているか確認してください。");
 
         // 一行目（ヘッダ）読み込み
         $headers = fgetcsv($fp);
@@ -55,7 +55,7 @@ class SellItemController extends Controller
             if ($result === null) {
                 fclose($fp);
                 Storage::delete($temporary_csv_file);
-                return redirect('sell_item_register')
+                return redirect('sell_item_csv_register')
                     ->with('message', '登録に失敗しました。CSVファイルのフォーマットが正しいことを確認してださい。');
             }
 
@@ -114,7 +114,7 @@ class SellItemController extends Controller
 
         // バリデーションエラーチェック
         if (count($registration_errors_list) > 0 || count($update_errors_list) > 0) {
-            return redirect('sell_item_register')
+            return redirect('sell_item_csv_register')
                 ->with('errors', ['registration_errors' => $registration_errors_list, 'update_errors' => $update_errors_list]);
         }
 
@@ -136,12 +136,12 @@ class SellItemController extends Controller
         if (isset($registration_csv_list) === true) {
             foreach ($registration_csv_list as $registration_csv) {
                 if ($item->create($registration_csv) === false) {
-                    return redirect('sell_item_register')->with('message', '新規登録処理に失敗しました。');
+                    return redirect('sell_item_csv_register')->with('message', '新規登録処理に失敗しました。');
                 }
             }
         }
 
-        return redirect('sell_item_register')->with('message', 'CSV登録が完了しました。' );
+        return redirect('sell_item_csv_register')->with('message', 'CSV登録が完了しました。' );
 
     }
 

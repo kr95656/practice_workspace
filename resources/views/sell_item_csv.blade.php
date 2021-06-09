@@ -5,7 +5,8 @@
 @endsection
 
 @section('content')
-    {{-- <form method="POST" action="{{ route('sell-item') }}" enctype="multipart/form-data" id="csvUpload">
+    <h1>CSV商品登録フォーム</h1>
+    {{-- <form method="POST" action="{{ route('sell-item-csv') }}" enctype="multipart/form-data" id="csvUpload">
         @csrf
         <input type="file" value="ファイルを選択" name="csv_file">
         <button type="submit">インポート</button>
@@ -13,7 +14,7 @@
 
 
     {{-- <p>CSVファイルで商品登録</p>
-    <form method="POST" action="{{ route('sell-item') }}" id="csvUpload" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('sell-item-csv') }}" id="csvUpload" enctype="multipart/form-data">
         <div class="row">
             <label class="col-1 text-right" for="form-file-1">File:</label>
             <div class="col-11">
@@ -55,7 +56,7 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('sell-item') }}" id="csvUpload" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('sell-item-csv') }}" id="csvUpload" enctype="multipart/form-data">
         @csrf
 
         <input type="file" value="ファイルを選択" name="csv_file">

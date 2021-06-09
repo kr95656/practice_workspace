@@ -37,7 +37,7 @@
                         </a>
                         {{-- ドロップダウンメニュー --}}
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('sell-item') }}">
+                            <a class="dropdown-item" href="{{ route('sell-item-csv') }}">
                                 <img src="/images/registered-regular.svg" alt="商品登録" style="width: 30px">商品を出品
                             </a>
 
