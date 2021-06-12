@@ -136,6 +136,22 @@
                         @enderror
                     </div>
 
+                    {{--  消費期限  --}}
+                    <div class="form-group mt-3">
+                        <label for="expiration_date-field">消費期限</label>
+                        <div class="input-group date datetimepicker" id="expiration_date" data-target-input="nearest">
+                          <input type="text" name="expiration_date"  id="expiration_date-field" class="form-control datetimepicker-input" data-target="#expiration_date" />
+                          <div class="input-group-append" data-target="#expiration_date" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="far fa-calendar"></i></div>
+                          </div>
+                        </div>
+                        @error('expiration_date')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
                     {{-- 販売価格 --}}
                     <div class="form-group mt-3">
                         <label for="price">販売価格</label>

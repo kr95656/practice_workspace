@@ -38,11 +38,11 @@
                         {{-- ドロップダウンメニュー --}}
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('sell-item-csv') }}">
-                                <img src="/images/registered-regular.svg" alt="商品登録（CSV）" style="width: 30px">商品登録（CSV）
+                                <i class="far fa-registered" style="width: 30px"></i>商品登録（CSV）
                             </a>
 
                             <a class="dropdown-item" href="{{ route('sell-item') }}">
-                                <img src="/images/registered-regular.svg" alt="商品登録（単品登録）" style="width: 30px">商品登録（単品登録）
+                                <i class="far fa-registered" style="width: 30px"></i>商品登録（単品登録）
                             </a>
 
                             <a class="dropdown-item" href="{{ route('stuffs.edit-profile') }}">
