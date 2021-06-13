@@ -7,7 +7,9 @@ use App\Models\ItemCondition;
 use App\Models\PrimaryCategory;
 use App\Models\PrimaryKind;
 use App\Models\PlaceOfOrigin;
+use App\Http\Requests\SellRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -29,12 +31,29 @@ class SellItemController extends Controller
             ->with('place_of_origins', $place_of_origin);
     }
 
+    // public function ItemRegister (Request $request)
+    public function ItemRegister (SellRequest $request)
+    {
+        $employee = Auth::user();
 
+        $item                        = new Item();
+        $item->employee_id           = $employee->id;
+        $item->name                  = $request->input('name');
+        $item->description           = $request->input('description');
+        $item->processing_date       = $request->input('processing_date');
+        $item->expiration_date       = $request->input('expiration_date');
+        $item->price                 = $request->input('price');
+        $item->stock_quantity        = $request->input('stock_quantity');
+        $item->secondary_category_id = $request->input('category');
+        $item->secondary_kind_id     = $request->input('kind');
+        $item->item_condition_id     = $request->input('condition');
+        $item->place_of_origin_id    = $request->input('place_of_origin');
+        $item->state                 = Item::STATE_IN_STOCK;
+        $item->save();
 
-
-
-
-
+        return redirect()->back()
+            ->with('status', '商品を出品しました。');
+    }
 
     // CSV登録
     public function showItemCsvRegisterForm ()

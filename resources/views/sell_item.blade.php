@@ -20,7 +20,6 @@
             <div class="col-8 offset-2 bg-white">
 
                 <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">商品を出品する</div>
-
                 <form method="POST" action="{{ route('sell-item') }}" class="p-5" enctype="multipart/form-data">
                     @csrf
 
@@ -140,16 +139,32 @@
                     <div class="form-group mt-3">
                         <label for="expiration_date-field">消費期限</label>
                         <div class="input-group date datetimepicker" id="expiration_date" data-target-input="nearest">
-                          <input type="text" name="expiration_date"  id="expiration_date-field" class="form-control datetimepicker-input" data-target="#expiration_date" />
-                          <div class="input-group-append" data-target="#expiration_date" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="far fa-calendar"></i></div>
-                          </div>
+                            <input type="text" name="expiration_date"  id="expiration_date-field" class="form-control datetimepicker-input @error('expiration_date') is-invalid @enderror" data-target="#expiration_date" />
+                            <div class="input-group-append" data-target="#expiration_date" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="far fa-calendar"></i></div>
+                            </div>
+                            @error('expiration_date')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
-                        @error('expiration_date')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
+                    </div>
+
+                    {{--  加工日  --}}
+                    <div class="form-group mt-3">
+                        <label for="processing_date-field">加工日</label>
+                        <div class="input-group date datetimepicker" id="processing_date" data-target-input="nearest">
+                            <input type="text" name="processing_date"  id="processing_date-field" class="form-control datetimepicker-input @error('processing_date') is-invalid @enderror" data-target="#processing_date" />
+                            <div class="input-group-append" data-target="#processing_date" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="far fa-calendar"></i></div>
+                            </div>
+                            @error('processing_date')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
                     </div>
 
                     {{-- 販売価格 --}}
@@ -157,6 +172,17 @@
                         <label for="price">販売価格</label>
                         <input id="price" type="number" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" required autocomplete="price" autofocus>
                         @error('price')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    {{-- 在庫数 --}}
+                    <div class="form-group mt-3">
+                        <label for="stock_quantity">在庫数</label>
+                        <input id="stock_quantity" type="number" class="form-control @error('stock_quantity') is-invalid @enderror" name="stock_quantity" value="{{ old('stock_quantity') }}" required autocomplete="stock_quantity" autofocus>
+                        @error('stock_quantity')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

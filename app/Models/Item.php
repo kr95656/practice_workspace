@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
+    // 在庫あり
+    const STATE_IN_STOCK = 'in_stock';
+    // 在庫なし
+    const STATE_OUT_OF_STOCK = 'out_of_stock';
+
     protected $fillable = ['id', 'name', 'price'];
 
     public static function retrieveTestColumnsByValue(string $header ,string $encoding)

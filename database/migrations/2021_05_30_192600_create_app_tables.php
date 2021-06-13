@@ -117,20 +117,28 @@ class CreateAppTables extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->unsignedInteger('price')->nullable(); //符号なし
+            $table->string('processing_date');
+            $table->string('expiration_date');
+            $table->unsignedInteger('price'); //符号なし
+            $table->unsignedInteger('stock_quantity'); //符号なし
+            $table->string('state');
             $table->timestamps();
 
             // 外部キー
-            $table->unsignedBigInteger('secondary_category_id')->nullable();
-            $table->unsignedBigInteger('item_condition_id')->nullable();
-            $table->unsignedBigInteger('employee_id')->nullable();
+            $table->unsignedBigInteger('secondary_category_id');
+            $table->unsignedBigInteger('secondary_kind_id');
+            $table->unsignedBigInteger('item_condition_id');
+            $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('customer_id')->nullable();
+            $table->unsignedBigInteger('place_of_origin_id');
 
             // // 子カテゴリ(secondary_category)
             // $table->unsignedBigInteger('primary_category_id')->nullable();
 
             $table->foreign('secondary_category_id')->references('id')->on('secondary_categories');
+            $table->foreign('secondary_kind_id')->references('id')->on('secondary_kinds');
             $table->foreign('item_condition_id')->references('id')->on('item_conditions');
+            $table->foreign('place_of_origin_id')->references('id')->on('place_of_origins');
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->foreign('customer_id')->references('id')->on('customers');
 
