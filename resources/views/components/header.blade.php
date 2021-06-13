@@ -45,6 +45,10 @@
                                 <i class="far fa-registered" style="width: 30px"></i>商品登録（単品登録）
                             </a>
 
+                            <a class="dropdown-item" href="{{ route('stuffs.registered-items') }}">
+                                <i class="fas fa-store-alt text-left" style="width: 30px"></i>登録した商品
+                            </a>
+
                             <a class="dropdown-item" href="{{ route('stuffs.edit-profile') }}">
                                 <i class="far fa-address-card text-left" style="width: 30px"></i>プロフィール編集
                             </a>

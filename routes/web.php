@@ -22,6 +22,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')
     ->name('home');
 
+Route::get('items/{item}', function () {return "商品詳細";})->name('item');
+
 //商品登録機能
 Route::middleware('auth')
     ->group(function () {
@@ -38,8 +40,11 @@ Route::prefix('stuff')
     ->namespace('Stuff')
     ->middleware('auth')
     ->group(function () {
-        Route::get('edit-profile', 'ProfileController@showEditProfile')
-            ->name('stuffs.edit-profile');
-        Route::post('edit-profile', 'ProfileController@editProfile')
-            ->name('stuffs.edit-profile');
+        //プロフィール編集画面
+        Route::get('edit-profile', 'ProfileController@showEditProfile')->name('stuffs.edit-profile');
+        //プロフィール編集
+        Route::post('edit-profile', 'ProfileController@editProfile')->name('stuffs.edit-profile');
+
+        //商品販売画面
+        Route::get('registered_items', 'RegisteredItemsController@showRegisteredItems')->name('stuffs.registered-items');
     });

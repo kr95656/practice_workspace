@@ -19,10 +19,27 @@ class SellItemController extends Controller
 {
     public function showItemRegisterForm ()
     {
+        // \DB::enableQueryLog();
+        // Item::all();
+        // dd(\DB::getQueryLog());
+
         $conditions = ItemCondition::orderBy('sort_no')->get();
-        $categories = PrimaryCategory::orderBy('sort_no')->get();
-        $kinds = PrimaryKind::orderBy('sort_no')->get();
         $place_of_origin = PlaceOfOrigin::orderBy('sort_no')->get();
+
+        // Eager Loadingで制約 N+1問題解消
+        $categories = PrimaryCategory::query()
+            ->with(['secondaryCategories' => function ($query) {
+                $query->orderBy('sort_no');
+            }])
+            ->orderBy('sort_no')
+            ->get();
+
+        $kinds = PrimaryKind::query()
+            ->with(['secondaryKinds' => function ($query) {
+                $query->orderBy('sort_no');
+            }])
+            ->orderBy('sort_no')
+            ->get();
 
         return view('sell_item')
             ->with('conditions', $conditions)
@@ -31,7 +48,6 @@ class SellItemController extends Controller
             ->with('place_of_origins', $place_of_origin);
     }
 
-    // public function ItemRegister (Request $request)
     public function ItemRegister (SellRequest $request)
     {
         $employee = Auth::user();

@@ -11,9 +11,30 @@ class Item extends Model
     // 在庫なし
     const STATE_OUT_OF_STOCK = 'out_of_stock';
 
+    // 在庫ありなしのアクセサ
+    public function getIsStateSellingAttribute ()
+    {
+        return $this->state === self::STATE_IN_STOCK;
+    }
+
+    public function secondaryCategory()
+    {
+        return $this->belongsTo(SecondaryCategory::class);
+    }
+
+    public function placeOfOrigin()
+    {
+        return $this->belongsTo(PlaceOfOrigin::class);
+    }
+
+    public function secondaryKind()
+    {
+        return $this->belongsTo(SecondaryKind::class);
+    }
+
     protected $fillable = ['id', 'name', 'price'];
 
-    public static function retrieveTestColumnsByValue(string $header ,string $encoding)
+    public static function retrieveTestColumnsByValue (string $header ,string $encoding)
     {
         // CSVヘッダとテーブルのカラムを関連付けておく
         $list = [

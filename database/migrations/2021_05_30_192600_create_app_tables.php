@@ -26,7 +26,6 @@ class CreateAppTables extends Migration
 
             $table->string('name');
             $table->integer('sort_no');
-
         });
 
         // 商品の部位_子カテゴリ
