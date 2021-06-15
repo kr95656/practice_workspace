@@ -48,3 +48,21 @@ Route::prefix('stuff')
         //商品販売画面
         Route::get('registered_items', 'RegisteredItemsController@showRegisteredItems')->name('stuffs.registered-items');
     });
+
+
+Route::prefix('customer')
+    ->namespace('Customer')
+    ->middleware('auth')
+    ->group(function () {
+        //顧客登録画面
+        Route::get('register', 'RegisterController@showRegisterCustomer')->name('customers.register-customer');
+
+        //顧客登録
+        Route::post('register', 'RegisterController@registerCustomer')->name('customers.register-customer');
+
+        // //顧客プロフィール編集
+        // Route::post('edit-profile', 'ProfileController@editProfile')->name('stuffs.edit-profile');
+
+        // //商品販売画面
+        // Route::get('registered_items', 'RegisteredItemsController@showRegisteredItems')->name('stuffs.registered-items');
+    });

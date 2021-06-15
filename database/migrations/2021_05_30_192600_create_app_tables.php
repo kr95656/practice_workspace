@@ -89,10 +89,12 @@ class CreateAppTables extends Migration
             $table->string('city');
             $table->string('street');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+
             $table->timestamps();
+
+            // $table->timestamp('email_verified_at')->nullable();
+            // $table->string('password');
+            // $table->rememberToken();
 
         });
 
@@ -177,17 +179,17 @@ class CreateAppTables extends Migration
         });
 
 
-        Schema::create('employees_customers', function (Blueprint $table) {
+        Schema::create('customer_employee', function (Blueprint $table) {
             $table->id();
-            $table->string('log');
+            $table->string('log')->nullable();
             $table->timestamps();
 
             // 外部キー
-            $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('employee_id');
 
-            $table->foreign('employee_id')->references('id')->on('employees');
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
 
         });
 
@@ -232,7 +234,7 @@ class CreateAppTables extends Migration
         Schema::dropIfExists('item_cages');
         Schema::dropIfExists('items');
         Schema::dropIfExists('item_conditions');
-        Schema::dropIfExists('employees_customers');
+        Schema::dropIfExists('customer_employee');
         Schema::dropIfExists('employees');
         Schema::dropIfExists('customers');
         Schema::dropIfExists('secondary_categories');
