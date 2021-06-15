@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+// TOP画面
 Route::get('', 'CustomersController@showCustomers')->name('top');
 
 Auth::routes();
@@ -19,7 +22,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')
     ->name('home');
 
-Route::get('customers/{customer}', function () {return "商品詳細";})->name('customer');
+//顧客詳細画面
+Route::get('customers/{customer}', 'CustomersController@showCustomerDetails')->name('customer');
 
 //商品登録機能
 Route::middleware('auth')
