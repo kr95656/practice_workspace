@@ -12,9 +12,7 @@ class RegisterController extends Controller
 {
     public function showRegisterCustomer ()
     {
-        // n+1問題を解消する
         $employees = Employee::all();
-        // $employees = $employees
 
         return view('customers.register_customer')
             ->with('employees', $employees);
@@ -32,10 +30,9 @@ class RegisterController extends Controller
         $customer->street          = $request->input('street');
 
         $customer->save();
-// dd($customer);
 
+        // 中間テーブル
         $employee_id = $request->input('employee_id');
-// dd($employee_id);
         $customer->employees()->attach($employee_id);
 
         return redirect()->back()

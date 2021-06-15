@@ -12,7 +12,9 @@ class RegisteredItemsController extends Controller
     {
         $employee = Auth::user();
 
-        $items = $employee->registeredItems()->orderBy('id', 'DESC')->get();
+        $items = $employee->registeredItems()
+                    ->orderBy('id', 'DESC')
+                    ->get();
 
         return view('stuffs.registered_items')
             ->with('items', $items)
