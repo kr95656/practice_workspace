@@ -37,6 +37,10 @@
                         </a>
                         {{-- ドロップダウンメニュー --}}
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('stuffs.charge-customer') }}">
+                                <i class="far fa-id-card" style="width: 30px"></i>担当顧客
+                            </a>
+
                             <a class="dropdown-item" href="{{ route('sell-item-csv') }}">
                                 <i class="far fa-registered" style="width: 30px"></i>商品登録（CSV）
                             </a>

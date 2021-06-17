@@ -95,7 +95,6 @@ class CreateAppTables extends Migration
             // $table->timestamp('email_verified_at')->nullable();
             // $table->string('password');
             // $table->rememberToken();
-
         });
 
         Schema::create('employees', function (Blueprint $table) {
@@ -111,7 +110,6 @@ class CreateAppTables extends Migration
             $table->string('avatar_file_name')->nullable();
             $table->rememberToken();
             $table->timestamps();
-
         });
 
         Schema::create('items', function (Blueprint $table) {
@@ -142,26 +140,6 @@ class CreateAppTables extends Migration
             $table->foreign('place_of_origin_id')->references('id')->on('place_of_origins');
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->foreign('customer_id')->references('id')->on('customers');
-
-            // // 子カテゴリ(secondary_category)
-            // $table->foreign('primary_category_id')->references('id')->on('primary_categories');
-
-            // $table->id();
-            // $table->string('name');
-            // $table->unsignedInteger('price'); //符号なし
-            // $table->timestamps();
-
-            // // 外部キー
-            // $table->unsignedBigInteger('secondary_category_id');
-            // $table->unsignedBigInteger('item_condition_id');
-            // $table->unsignedBigInteger('employee_id');
-            // $table->unsignedBigInteger('customer_id');
-
-            // $table->foreign('secondary_category_id')->references('id')->on('secondary_categories');
-            // $table->foreign('item_condition_id')->references('id')->on('item_conditions');
-            // $table->foreign('employee_id')->references('id')->on('employees');
-            // $table->foreign('customer_id')->references('id')->on('customers');
-
         });
 
         Schema::create('item_cages', function (Blueprint $table) {
@@ -175,11 +153,22 @@ class CreateAppTables extends Migration
 
             $table->foreign('item_id')->references('id')->on('items');
             $table->foreign('customer_id')->references('id')->on('customers');
-
         });
 
-
         Schema::create('customer_employee', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+
+            // 外部キー
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('employee_id');
+
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+        });
+
+        // 顧客ログ
+        Schema::create('customer_logs', function (Blueprint $table) {
             $table->id();
             $table->string('log')->nullable();
             $table->timestamps();
@@ -190,7 +179,6 @@ class CreateAppTables extends Migration
 
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-
         });
 
         Schema::create('orders', function (Blueprint $table) {
@@ -202,7 +190,6 @@ class CreateAppTables extends Migration
             $table->unsignedBigInteger('customer_id');
 
             $table->foreign('customer_id')->references('id')->on('customers');
-
         });
 
         Schema::create('items_orders', function (Blueprint $table) {
@@ -217,7 +204,6 @@ class CreateAppTables extends Migration
 
             $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('item_id')->references('id')->on('items');
-
         });
     }
 
@@ -235,6 +221,7 @@ class CreateAppTables extends Migration
         Schema::dropIfExists('items');
         Schema::dropIfExists('item_conditions');
         Schema::dropIfExists('customer_employee');
+        Schema::dropIfExists('customer_logs');
         Schema::dropIfExists('employees');
         Schema::dropIfExists('customers');
         Schema::dropIfExists('secondary_categories');

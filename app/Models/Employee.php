@@ -60,4 +60,9 @@ class Employee extends Authenticatable
     {
         return $this->belongsToMany(Customer::class)->withTimestamps();
     }
+
+    public function customersLog ()
+    {
+        return $this->hasMany(CustomerLog::class);
+    }
 }

@@ -12,4 +12,9 @@ class Customer extends Model
         return $this->belongsToMany(Employee::class)->withTimestamps();
     }
 
+    public function employeesLog ()
+    {
+        return $this->hasMany(CustomerLog::class);
+    }
+
 }

@@ -15,15 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 
 // TOP画面
-Route::get('', 'CustomersController@showCustomers')->name('top');
+Route::get('/', function () {
+    return view('welcome');
+})->name('top');
+// Route::get('', 'CustomersController@showCustomers')->name('top');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')
     ->name('home');
-
-//顧客詳細画面
-Route::get('customers/{customer}', 'CustomersController@showCustomerDetails')->name('customer');
 
 //商品登録機能
 Route::middleware('auth')
@@ -42,14 +42,23 @@ Route::prefix('stuff')
     ->middleware('auth')
     ->group(function () {
         //プロフィール編集画面
-        Route::get('edit-profile', 'ProfileController@showEditProfile')->name('stuffs.edit-profile');
+        Route::get('edit_profile', 'ProfileController@showEditProfile')->name('stuffs.edit-profile');
         //プロフィール編集
-        Route::post('edit-profile', 'ProfileController@editProfile')->name('stuffs.edit-profile');
+        Route::post('edit_profile', 'ProfileController@editProfile')->name('stuffs.edit-profile');
 
         //商品販売画面
         Route::get('registered_items', 'RegisteredItemsController@showRegisteredItems')->name('stuffs.registered-items');
-    });
 
+        //担当顧客
+        Route::get('charge_customer', 'CustomersController@showCustomers')->name('stuffs.charge-customer');
+
+        //顧客詳細画面
+        Route::get('customers/{customer}', 'CustomersController@showCustomerDetails')->name('stuffs.details-charge-customer');
+
+        // 顧客詳細のログ機能
+        Route::post('customers/{customer}', 'CustomersController@logsCustomer')->name('stuffs.details-charge-customer');
+
+    });
 
 Route::prefix('customer')
     ->namespace('Customer')

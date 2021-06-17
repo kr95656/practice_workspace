@@ -29,7 +29,16 @@
                     </ul>
                 </div>
             </div>
-
+            <ul>
+                {{--  @foreach($employee_customers->customerLogs as $log)  --}}
+                @foreach($employee_customers->employeesLog as $log)
+                    <li>
+                        {{ $log->log }}<br/>
+                        記入時刻：{{ $log->created_at }} 記入者：{{ $log->employee->name }}<br/>
+                        <br/>
+                    </li>
+                @endforeach
+            </ul>
             {{--  <div class="my-3">{!! nl2br(e($customer->name)) !!}</div>  --}}
         </div>
     </div>
