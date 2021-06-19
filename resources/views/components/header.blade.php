@@ -57,6 +57,10 @@
                                 <i class="far fa-address-card text-left" style="width: 30px"></i>プロフィール編集
                             </a>
 
+                            <a class="dropdown-item" href="{{ route('customers.register-customer') }}">
+                                <i class="far fa-address-book text-left" style="width: 30px"></i>顧客登録
+                            </a>
+
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fas fa-sign-out-alt text-left" style="width: 30px"></i>ログアウト
                             </a>

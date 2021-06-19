@@ -1,10 +1,11 @@
 require('./bootstrap');
 
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
-import { faAddressCard, faClock, faCalendar, faRegistered, faIdCard} from '@fortawesome/free-regular-svg-icons'
+import { faAddressCard, faAddressBook, faClock, faCalendar, faRegistered, faIdCard} from '@fortawesome/free-regular-svg-icons'
 import { faSearch, faStoreAlt, faShoppingBag, faSignOutAlt, faYenSign, faCamera, faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons'
 
 library.add(faCalendar,
+            faAddressBook,
             faSearch,
             faAddressCard,
             faStoreAlt,

@@ -55,8 +55,23 @@ Route::prefix('stuff')
         //顧客詳細画面
         Route::get('customers/{customer}', 'CustomersController@showCustomerDetails')->name('stuffs.details-charge-customer');
 
-        // 顧客詳細のログ機能
-        Route::post('customers/{customer}', 'CustomersController@logsCustomer')->name('stuffs.details-charge-customer');
+        // 顧客詳細のログ追加画面
+        Route::get('customers/{customer}/log_form', 'CustomersController@showLogsCustomer')->name('stuffs.log');
+
+        // 顧客詳細のログ追加
+        Route::post('customers/{customer}/log_form', 'CustomersController@postLogsCustomer')->name('stuffs.log');
+
+        // 顧客詳細のログ編集画面
+        Route::get('customers/{customer}/log_form_edit/{id}', 'CustomersController@showEditLogsCustomer')->name('stuffs.log-edit');
+
+        // 顧客詳細のログ更新
+        Route::post('customers/{customer}/log_form_edit/{id}', 'CustomersController@updateLogsCustomer')->name('stuffs.log-edit');
+
+        // 顧客詳細のログ削除確認画面
+        Route::get('customers/{customer}/log_delete/{id}', 'CustomersController@showDeleteLogsCustomer')->name('stuffs.log-delete');
+
+        // 顧客詳細のログ削除
+        Route::post('customers/{customer}/log_delete/{id}', 'CustomersController@deleteLogsCustomer')->name('stuffs.log-delete');
 
     });
 
